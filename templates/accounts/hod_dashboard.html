@@ -1,0 +1,39 @@
+{% extends 'account/base_dashboard.html' %}
+
+{% block dashboard-body %}
+<div class="container">
+  <h3>Head of Department Dashboard</h3>
+  <p>Welcome, {{ user.username }}!</p>
+  <div class="topstat d-flex justify-content-between">
+    <div class="statbox">
+      <i class="fas fa-users fa-3x"></i>
+      <div class="text">
+        <p>Students</p>
+        <h3>{{ total_students }}</h3>
+      </div>
+    </div>
+    <div class="statbox">
+      <i class="fas fa-clock fa-3x"></i>
+      <div class="text">
+        <p>Pending TC Applications</p>
+        <h3>{{ total_tc_pending_applications }}</h3>
+      </div>
+    </div>
+    <div class="statbox">
+      <i class="fas fa-check fa-3x"></i>
+      <div class="text">
+        <p>Pending Verification</p>
+        <h3>{{ students_pending_verfication }}</h3>
+      </div>
+    </div>
+    <div class="statbox">
+      <i class="fas fa-check-circle fa-3x"></i>
+      <div class="text">
+        <p>Total TC Issued</p>
+        <h3>{{ total_tc_issued }}</h3>
+      </div>
+    </div>
+  </div>
+  <!-- Add any HOD-specific content here -->
+</div>
+{% endblock %}

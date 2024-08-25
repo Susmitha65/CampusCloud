@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Result Analysis</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+        }
+        .container {
+            width: 90%;
+            margin: 50px auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #007BFF;
+            color: white;
+        }
+        .upload-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            margin-top: 30px;
+        }
+        .upload-container h2 {
+            margin-bottom: 20px;
+        }
+        .upload-container input[type="file"] {
+            margin-bottom: 20px;
+        }
+        .upload-container label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        .upload-container button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            border: none;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Result Analysis</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Student Name</th>
+                    <th>Department</th>
+                    <th>Subject</th>
+                    <th>Marks Obtained</th>
+                    <th>Total Marks</th>
+                    <th>Percentage</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for result in results %}
+                <tr>
+                    <td>{{ result.student.name }}</td>
+                    <td>{{ result.student.department.name }}</td>
+                    <td>{{ result.subject }}</td>
+                    <td>{{ result.marks_obtained }}</td>
+                    <td>{{ result.total_marks }}</td>
+                    <td>{{ result.percentage }}%</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- Upload CSV File Section -->
+        <div class="upload-container">
+            <h2>Upload CSV File</h2>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <label for="csv_file">Choose CSV File to Upload</label>
+                <input type="file" id="csv_file" name="csv_file" accept=".csv" required>
+                <br>
+                <button type="submit">Upload and Analyze</button>
+            </form>
+        </div>
+
+        <!-- Display Uploaded Data Section -->
+        <h2>Uploaded Data</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Student Name</th>
+                    <th>Department</th>
+                    <th>Subject</th>
+                    <th>Marks Obtained</th>
+                    <th>Total Marks</th>
+                    <th>Percentage</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if uploaded_data %}
+                    {% for row in uploaded_data %}
+                    <tr>
+                        <td>{{ row.student_name }}</td>
+                        <td>{{ row.department }}</td>
+                        <td>{{ row.subject }}</td>
+                        <td>{{ row.marks_obtained }}</td>
+                        <td>{{ row.total_marks }}</td>
+                        <td>{{ row.percentage }}%</td>
+                    </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="6">No data available. Please upload a CSV file.</td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

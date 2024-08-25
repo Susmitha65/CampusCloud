@@ -1,0 +1,32 @@
+<!-- templates/account/dashboard.html -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Welcome to the Dashboard, {{ user.username }}!</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="{% url 'account:student_dashboard' %}">Student Dashboard</a></li>
+            <li><a href="{% url 'account:teacher_dashboard' %}">Teacher Dashboard</a></li>
+            <li><a href="{% url 'account:librarian_dashboard' %}">Librarian Dashboard</a></li>
+            <li><a href="{% url 'account:hod_dashboard' %}">HOD Dashboard</a></li>
+            <li><a href="{% url 'account:workshop_dashboard' %}">Workshop Dashboard</a></li>
+            <li><a href="{% url 'account:clerk_dashboard' %}">Clerk Dashboard</a></li>
+        </ul>
+    </nav>
+    <section>
+        <p>This is your main dashboard. Use the links above to navigate to your specific role-based dashboard.</p>
+    </section>
+    <footer>
+        <p>&copy; 2024 Your Organization</p>
+    </footer>
+</body>
+</html>
